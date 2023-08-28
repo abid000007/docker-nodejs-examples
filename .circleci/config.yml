@@ -13,10 +13,12 @@ jobs:
             source ~/.bashrc
             cd multi
             npm install
+            npm run build
+            
           # Add a separate step for the npm start command
       - run:
           name: Start Application
-          command: node index.js
+          command: npm start
 
 workflows:
   version: 2
