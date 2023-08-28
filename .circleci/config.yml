@@ -3,12 +3,21 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image:  circleci/node:4.8.2
+      - image: circleci/node:14
     steps:
-      - checkout 
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: |
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+            source ~/.bashrc
+            nvm install 14
+            cd multi
+            npm install
+          # Add a separate step for the npm start command
       - run:
           name: Start Application
-          command: cd multi && npm install &&  node index.js
+          command: node index.js
 
 workflows:
   version: 2
